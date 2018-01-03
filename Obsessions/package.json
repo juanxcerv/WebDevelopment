@@ -1,0 +1,14 @@
+{
+  "name": "obsessions",
+  "version": "1.0.0",
+  "description": "Fullstack application where users can blog/share their experiences regarding their obsessions.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juan Cervantes",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

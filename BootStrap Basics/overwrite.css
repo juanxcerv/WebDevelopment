@@ -1,0 +1,23 @@
+.pink {
+    background-color: teal;
+    border: 2px solid black;
+}
+.orange {
+    background: orange;
+    border: 2px dashed red;
+}
+body {
+    padding-top: 70px;
+}
+.jumbotron {
+    color: rgb(19, 59, 35);
+}
+.navbar-inverse {
+    background: rgb(13, 49, 28);
+}
+.navbar-inverse .navbar-nav>li>a {
+    color:white;
+}
+.navbar-inverse .navbar-brand {
+    color: white;
+}

@@ -1,0 +1,26 @@
+#run {
+    color: teal;
+    background-color: azure;
+    text-decoration: line-through;
+    text-decoration-color: black;
+}
+
+li {
+    border: 2px solid black;
+}
+
+* {
+    border: 1px solid black;
+}
+
+/* h1 + ul {
+    background-color: bisque;
+} */
+
+input[type = "checkbox"] {
+    color: cornflowerblue;
+}
+
+li:nth-of-type(2) {
+    color: salmon;
+}
