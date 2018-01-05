@@ -1,0 +1,24 @@
+<% include ./partials/header %>
+<body id = "new">
+    <div class = "ui main text container inverted segment">
+        <div class = "ui huge header">
+            New Blog
+        </div>
+        <form class ="ui inverted form"action = "/blogs" method = "POST">
+            <div class = "field">
+                <label>Title:</label>
+                <input type="text" name= "blog[title]" placeholder = "title">
+            </div>
+            <div class = "field">
+                <label>Image URL:</label>
+                <input type="text" name= "blog[image]" placeholder = "image">
+            </div>
+            <div class = "field">
+                <label>Blog Content:</label>
+                <textarea rows="5" cols="1" name= "blog[body]"></textarea>
+            </div>
+            <button type="submit" class = "ui inverted teal button">Submit</button>
+        </form>
+    </div>
+
+<% include ./partials/footer %>

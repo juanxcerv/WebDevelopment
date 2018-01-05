@@ -10,12 +10,24 @@ mongoose.connect("mongodb://localhost/yelpcamp");
 //SCHEMA setup
 var campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 
 // campground model
 var Campground = mongoose.model("Campground", campgroundSchema);
 
+// Campground.create({
+//     name : "Salmon Creek",
+//     image : "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg",
+//     description: "Welcome to Salmon creek where you can find Salmon in the creek!"
+// }, function(err, campground){
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(campground);
+//     }
+// });
 //body parser and ejs files
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -32,7 +44,7 @@ app.get("/campgrounds", function(req, res){
         if (err) {
             console.log(err);
         } else {
-            res.render("campgrounds", {campgrounds:campgrounds});
+            res.render("index", {campgrounds:campgrounds});
         }
     });
 });
@@ -41,7 +53,8 @@ app.post("/campgrounds", function(req, res){
     //get data from the form and add it to the campgrounds array
     var name = req.body.name;
     var image = req.body.image;
-    var camp = {name: name, image: image}
+    var description = req.body.description;
+    var camp = {name: name, image: image, description: description};
     Campground.create(camp, function(err, campground){
         if(err){
             console.log(err);
@@ -57,7 +70,14 @@ app.get("/campgrounds/new", function(req, res){
 
 //SHOW shows information about one specific campground 
 app.get("/campgrounds/:id", function(req, res){
-    res.send('This is where the information page will be');
+    Campground.findById(req.params.id, function(err, campground){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(campground);
+            res.render("show", {campground: campground});
+        }
+    });
 });
 
 app.listen(3000, function(){
