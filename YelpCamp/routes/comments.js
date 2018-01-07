@@ -22,12 +22,12 @@ router.post("/",middleware.isLoggedIn,function(req, res){
    //lookup campground using ID
    Campground.findById(req.params.id, function(err, campground){
        if(err){
-           console.log(err);
+           req.flash('error', "Oops, looks like the comment wasn't found.");
            res.redirect("/campgrounds");
        } else {
         Comment.create(req.body.comment, function(err, comment){
            if(err){
-               console.log(err);
+                req.flash('error', "Comment creation failed.");
            } else {
                //add username and id to comment
                comment.author.id = req.user._id;
@@ -36,7 +36,7 @@ router.post("/",middleware.isLoggedIn,function(req, res){
                comment.save();
                campground.comments.push(comment);
                campground.save();
-               console.log(comment);
+               req.flash('success', "Your comment has been posted!");
                res.redirect('/campgrounds/' + campground._id);
            }
         });
@@ -73,6 +73,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
        if(err){
            res.redirect("back");
        } else {
+           req.flash('success', "Your comment has been deleted!");
            res.redirect("/campgrounds/" + req.params.id);
        }
     });
