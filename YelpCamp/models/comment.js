@@ -1,10 +1,14 @@
 var mongoose = require("mongoose");
 
-//SCHEMA setup
-var commentSchema = new mongoose.Schema({
-    author: String,
-    text: String
+var commentSchema = mongoose.Schema({
+    text: String,
+    author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    }
 });
 
-// campground model
 module.exports = mongoose.model("Comment", commentSchema);
