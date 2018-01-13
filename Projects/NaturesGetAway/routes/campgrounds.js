@@ -6,7 +6,7 @@ var geocoder = require('geocoder');
 
 //INDEX - show all campgrounds
 router.get("/", function(req, res){
-    var perPage = 8;
+    var perPage = 12;
     var pageQuery = parseInt(req.query.page);
     var pageNumber = pageQuery ? pageQuery : 1;
     Campground.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allCampgrounds) {
