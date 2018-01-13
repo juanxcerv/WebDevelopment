@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
@@ -27,7 +28,7 @@ app.locals.moment = require('moment');
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
-    secret: "There is no secrets in life, just hidden truths hidden beneath the surface",
+    secret: "There is no secrets in life, just truth hidden beneath the surface",
     resave: false,
     saveUninitialized: false
 }));

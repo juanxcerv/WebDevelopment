@@ -17,8 +17,17 @@
                     <input class="form-control" type="text" name="location" id="location" value="<%= campground.location %>">
                 </div>
                 <div class="form-group">
+                    <label for="season">Season</label>
+                        <select class="form-control" id="season" name = "season">
+                            <option>Summer</option>
+                            <option>Fall</option>
+                            <option>Winter</option>
+                            <option>Spring</option>
+                        </select>
+                </div>
+                <div class="form-group" >
                     <label for="image">Image</label>
-                    <input id = "image" class="form-control" type="text" name="image" value="<%= campground.image %>">
+                    <input type="file" id="image" name="image" accept="image/*" required>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>

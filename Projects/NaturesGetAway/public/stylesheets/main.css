@@ -21,3 +21,10 @@
     height: 400px;
     width: 100%;
 }
+#flex {
+    display: flex;
+    justify-content: space-between;
+}
+li.nav-item a.navlink {
+    color: black;
+}
