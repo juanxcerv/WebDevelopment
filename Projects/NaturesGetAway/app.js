@@ -7,14 +7,14 @@ var express     = require("express"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
-    Campground  = require("./models/campground"),
+    Getaway  = require("./models/getaway"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
     seedDB      = require("./seeds")
     
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
-    campgroundRoutes = require("./routes/campgrounds"),
+    getawayRoutes = require("./routes/getaways"),
     indexRoutes      = require("./routes/index")
     
 mongoose.connect("mongodb://localhost/NaturesGetAway");
@@ -46,8 +46,8 @@ app.use(function(req, res, next){
 });
 
 app.use("/", indexRoutes);
-app.use("/campgrounds", campgroundRoutes);
-app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/getaways", getawayRoutes);
+app.use("/getaways/:id/comments", commentRoutes);
 
 
 app.listen(3000, function(){

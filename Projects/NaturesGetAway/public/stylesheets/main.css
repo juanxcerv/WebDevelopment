@@ -25,6 +25,3 @@
     display: flex;
     justify-content: space-between;
 }
-li.nav-item a.navlink {
-    color: black;
-}

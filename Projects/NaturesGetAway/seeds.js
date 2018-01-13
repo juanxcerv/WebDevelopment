@@ -1,5 +1,5 @@
 var mongoose   = require("mongoose"),
-    Campground = require("./models/campground"),
+    Getaway = require("./models/getaway"),
     Comment    = require("./models/comment");
     data       = [
                     {
@@ -29,10 +29,10 @@ var mongoose   = require("mongoose"),
                     }
                 ], 
     seedDB      = function(){
-                    Campground.remove({}, function(err){
-                        (err) ? console.log(err) : console.log("Removed Campgrounds");
+                    Getaway.remove({}, function(err){
+                        (err) ? console.log(err) : console.log("Removed Getaways");
                         data.forEach(function(seed){
-                            Campground.create(seed, function(err, camp){
+                            Getaway.create(seed, function(err, camp){
                                 (err) ? console.log(err) : Comment.create({text:"This place is great, bring mosquito repellant!", author: "WildMan"},
                                     function(err, comment){
                                         if (err){
