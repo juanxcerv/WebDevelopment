@@ -1,20 +1,20 @@
 <% include ../partials/header %>
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center">Edit <%= campground.name %></h1>
+        <h1 style="text-align: center">Edit <%= getaway.name %></h1>
         <div style="width: 30%; margin: 25px auto;">
-            <form action="/getaways/<%= campground._id %>?_method=PUT" method="POST">
+            <form action="/getaways/<%= getaway._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input id = "name" class="form-control" type="text" name="name" value="<%= campground.name %>">
+                    <input id = "name" class="form-control" type="text" name="name" value="<%= getaway.name %>">
                 </div>
                 <div class="form-group">
                     <label for="price">Price Per Day</label>
-                    <input id = "price" class="form-control" type="number" name="price" value="<%= campground.price %>">
+                    <input id = "price" class="form-control" type="number" name="price" value="<%= getaway.price %>">
                 </div>
                 <div class="form-group">
                     <label for="location">Location</label>
-                    <input class="form-control" type="text" name="location" id="location" value="<%= campground.location %>">
+                    <input class="form-control" type="text" name="location" id="location" value="<%= getaway.location %>">
                 </div>
                 <div class="form-group">
                     <label for="season">Season</label>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input id = "description" class="form-control" type="text" name="description" value="<%= campground.description %>">
+                    <input id = "description" class="form-control" type="text" name="description" value="<%= getaway.description %>">
                 </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Submit!</button>

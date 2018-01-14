@@ -179,20 +179,24 @@ router.get("/:id/edit", middleware.checkGetawayOwnership, function(req, res){
 router.put("/:id",middleware.checkGetawayOwnership, function(req, res){
     // find and update the correct getaway
     geocoder.geocode(req.body.location, function (err, data) {
-        var lat = data.results[0].geometry.location.lat;
-        var lng = data.results[0].geometry.location.lng;
-        var location = data.results[0].formatted_address;
-        var newData = {name: req.body.name, image: req.body.image, description: req.body.description, price: req.body.price, season: req.body.season, location: location, lat: lat, lng: lng};
-        Getaway.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, Getaway){
-            if(err){
-                req.flash("error", err.message);
-                res.redirect("back");
-            } else {
-                req.flash("success","Successfully Updated!");
-                res.redirect("/getaways/" + Getaway._id);
-            }
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            // add cloudinary url for the image to the getaways object under image property
+            var image = result.secure_url;
+            var lat = data.results[0].geometry.location.lat;
+            var lng = data.results[0].geometry.location.lng;
+            var location = data.results[0].formatted_address;
+            var newData = {name: req.body.name, image: req.body.image, description: req.body.description, price: req.body.price, season: req.body.season, location: location, lat: lat, lng: lng};
+            Getaway.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, Getaway){
+                if(err){
+                    req.flash("error", err.message);
+                    res.redirect("back");
+                } else {
+                    req.flash("success","Successfully Updated!");
+                    res.redirect("/getaways/" + Getaway._id);
+                }
+            });
         });
-      });
+    });
 });
 
 // DESTROY Getaway ROUTE
