@@ -19,27 +19,26 @@
         </p>
         <hr>
     </section>
-    <nav class="navbar navbar-default" style="background-color: #e3f2fd;">
+    <nav id = "season" class="navbar navbar-default" style="background-color: #e3f2fd;">
         <div class="container-fluid">
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link hoverable active" href="/getaways">All</a>
+                        <a id = "All" class="nav-link hoverable active" href="/getaways/All">All</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link hoverable" href="/getaways/Summer">Summer</a>
+                        <a id = "Summer" class="nav-link hoverable" href="/getaways/Summer">Summer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link hoverable" href="/getaways/Fall">Fall</a>
+                        <a id = "Fall" class="nav-link hoverable" href="/getaways/Fall">Fall</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link hoverable" href="/getaways/Winter">Winter</a>
+                        <a id = "Winter" class="nav-link hoverable" href="/getaways/Winter">Winter</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link hoverable" href="/getaways/Spring">Spring</a>
+                        <a id ="Spring" class="nav-link hoverable" href="/getaways/Spring">Spring</a>
                     </li>
                 </ul>
-            </div>
         </div>
     </nav>
 
@@ -65,6 +64,7 @@
             </div>
         <% }); %>
     </div>
+    </section>
     <div class="row text-center">
     <% if (pages && pages > 0) { %>
     <ul class="pagination text-center">
@@ -118,3 +118,9 @@
 </footer> 
 
 <% include ../partials/footer %>
+
+<% if (filter){ %>
+    <script>
+        window.onload = window.location.hash = '#season';
+    </script>
+<% } %>

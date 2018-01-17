@@ -38,7 +38,8 @@ router.get("/", function(req, res){
                 res.render("getaways/index", {
                     getaways: allGetaways,
                     current: pageNumber,
-                    pages: Math.ceil(count / perPage)
+                    pages: Math.ceil(count / perPage),
+                    filter: false
                 });
             }
         });
@@ -56,7 +57,8 @@ router.get("/Winter", function(req, res){
                 res.render("getaways/index", {
                     getaways: allGetaways,
                     current: pageNumber,
-                    pages: Math.ceil(count / perPage)
+                    pages: Math.ceil(count / perPage),
+                    filter: true
                 });
             }
         });
@@ -74,7 +76,8 @@ router.get("/Fall", function(req, res){
                 res.render("getaways/index", {
                     getaways: allGetaways,
                     current: pageNumber,
-                    pages: Math.ceil(count / perPage)
+                    pages: Math.ceil(count / perPage),
+                    filter: true
                 });
             }
         });
@@ -92,7 +95,8 @@ router.get("/Summer", function(req, res){
                 res.render("getaways/index", {
                     getaways: allGetaways,
                     current: pageNumber,
-                    pages: Math.ceil(count / perPage)
+                    pages: Math.ceil(count / perPage),
+                    filter: true
                 });
             }
         });
@@ -110,7 +114,26 @@ router.get("/Spring", function(req, res){
                 res.render("getaways/index", {
                     getaways: allGetaways,
                     current: pageNumber,
-                    pages: Math.ceil(count / perPage)
+                    pages: Math.ceil(count / perPage),
+                    filter: true
+                });
+            }
+        });
+    });
+});router.get("/All", function(req, res){
+    var perPage = 12;
+    var pageQuery = parseInt(req.query.page);
+    var pageNumber = pageQuery ? pageQuery : 1;
+    Getaway.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allGetaways) {
+        Getaway.count().exec(function (err, count) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render("getaways/index", {
+                    getaways: allGetaways,
+                    current: pageNumber,
+                    pages: Math.ceil(count / perPage),
+                    filter: true
                 });
             }
         });
@@ -176,7 +199,7 @@ router.get("/:id/edit", middleware.checkGetawayOwnership, function(req, res){
 });
 
 // UPDATE GETAWAY ROUTE
-router.put("/:id",middleware.checkGetawayOwnership, function(req, res){
+router.put("/:id",middleware.checkGetawayOwnership, upload.single('image'), function(req, res){
     // find and update the correct getaway
     geocoder.geocode(req.body.location, function (err, data) {
         cloudinary.uploader.upload(req.file.path, function(result) {
@@ -185,7 +208,7 @@ router.put("/:id",middleware.checkGetawayOwnership, function(req, res){
             var lat = data.results[0].geometry.location.lat;
             var lng = data.results[0].geometry.location.lng;
             var location = data.results[0].formatted_address;
-            var newData = {name: req.body.name, image: req.body.image, description: req.body.description, price: req.body.price, season: req.body.season, location: location, lat: lat, lng: lng};
+            var newData = {name: req.body.name, image: image, description: req.body.description, price: req.body.price, season: req.body.season, location: location, lat: lat, lng: lng};
             Getaway.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, Getaway){
                 if(err){
                     req.flash("error", err.message);
@@ -195,7 +218,7 @@ router.put("/:id",middleware.checkGetawayOwnership, function(req, res){
                     res.redirect("/getaways/" + Getaway._id);
                 }
             });
-        });
+          });
     });
 });
 
